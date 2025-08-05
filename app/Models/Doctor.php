@@ -16,4 +16,9 @@ class Doctor extends Model
         'thirdName',
         'post'
     ];
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->secondName} {$this->name} {$this->thirdName}";
+    }
 }

@@ -11,7 +11,8 @@ class Schedule extends Model
         'doctor_id',
         'date',
         'start_time',
-        'end_time'
+        'end_time',
+        'room'
     ];
 
     /**

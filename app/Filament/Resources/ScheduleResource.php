@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class ScheduleResource extends Resource
 {
     protected static ?string $model = Schedule::class;
-
+    protected static ?string $pluralModelLabel  = 'Расписание';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
@@ -30,6 +30,7 @@ class ScheduleResource extends Resource
                 Forms\Components\DatePicker::make('date')->required()->label('Дата'),
                 Forms\Components\TimePicker::make('start_time')->required()->label('Начало'),
                 Forms\Components\TimePicker::make('end_time')->required()->label('Конец'),
+                Forms\Components\TextInput::make('room')->label('Кабинет'),
             ]);
     }
 
@@ -41,6 +42,7 @@ class ScheduleResource extends Resource
                 Tables\Columns\TextColumn::make('date')->date()->label('Дата'),
                 Tables\Columns\TextColumn::make('start_time')->label('Начало'),
                 Tables\Columns\TextColumn::make('end_time')->label('Конец'),
+                Tables\Columns\TextColumn::make('room')->label('Кабинет'),
             ])
             ->filters([
                 //

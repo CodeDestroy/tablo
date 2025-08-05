@@ -10,10 +10,10 @@
     <script src="{{ asset('js/tailwind/tailwind.pugins.min.js') }}"></script>
     <script src="{{ asset('js/tailwind/index.global.js') }}"></script>
     <title>Расписание</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="{{ asset('css/swiper/swiper-bundle.min.css') }}" />
 </head>
 <!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="{{ asset('js/swiper/swiper-bundle.min.js')}}"></script>
 <style>
 .swiper-button-next,
 .swiper-button-prev {
@@ -32,180 +32,25 @@
     <div class="swiper w-full h-full">
         <div class="swiper-wrapper h-full" id="swiper-wrapper">
             <ul role="list" class="divide-y divide-gray-100 bg-gray-300 text-black w-full h-full flex flex-col">
-                <li class="flex justify-between gap-x-6 p-5 flex-1">
-                    <div class="flex min-w-0 gap-x-4">
-                        <div class="size-20 flex-none rounded-full "></div>
-                        <div class="min-w-0 flex-auto">
-                            <p class="text-3xl font-semibold ">Новичихин Андрей Евгеньевич</p>
-                            <p class="mt-1 truncate text-2xl font-semibold">Врач-кардиолог</p>
+                @foreach ($schedule as $entry)
+                    <li class="flex justify-between gap-x-6 p-5 flex-1">
+                        <div class="flex min-w-0 gap-x-4">
+                            <div class="size-20 flex-none rounded-full "></div>
+                            <div class="min-w-0 flex-auto">
+                                <p class="text-3xl font-semibold ">{{ $entry->doctor->secondName . ' ' .$entry->doctor->name . ' ' . $entry->doctor->thirdName ?? 'Неизвестный врач' }}</p>
+                                <p class="mt-1 truncate text-2xl font-semibold">{{$entry->doctor->post}}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                        <p class="text-2xl font-semibold items-center m-auto">Время</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">10:00-12:00</p>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end  ">
-                        <p class="text-2xl font-semibold items-center m-auto">Кабинет</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">102</p>
-                    </div>
-                </li>
-                <li class="flex justify-between gap-x-6 p-5 flex-1">
-                    <div class="flex min-w-0 gap-x-4">
-                        <div class="size-20 flex-none rounded-full "></div>
-                        <div class="min-w-0 flex-auto">
-                            <p class="text-3xl font-semibold ">Новичихин Андрей Евгеньевич</p>
-                            <p class="mt-1 truncate text-2xl font-semibold">Врач-кардиолог</p>
+                        <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                            <p class="text-2xl font-semibold items-center m-auto">Время</p>
+                            <p class="mt-1 text-3xl font-semibold items-center m-auto">{{ \Carbon\Carbon::parse($entry->start_time)->format('H:i') }} - {{ \Carbon\Carbon::parse($entry->end_time)->format('H:i') }}</p>
                         </div>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                        <p class="text-2xl font-semibold items-center m-auto">Время</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">10:00-12:00</p>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end  ">
-                        <p class="text-2xl font-semibold items-center m-auto">Кабинет</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">102</p>
-                    </div>
-                </li>
-                <li class="flex justify-between gap-x-6 p-5 flex-1">
-                    <div class="flex min-w-0 gap-x-4">
-                        <div class="size-20 flex-none rounded-full "></div>
-                        <div class="min-w-0 flex-auto">
-                            <p class="text-3xl font-semibold ">Новичихин Андрей Евгеньевич</p>
-                            <p class="mt-1 truncate text-2xl font-semibold">Врач-кардиолог</p>
+                        <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end  ">
+                            <p class="text-2xl font-semibold items-center m-auto">Кабинет</p>
+                            <p class="mt-1 text-3xl font-semibold items-center m-auto">{{$entry->room}}</p>
                         </div>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                        <p class="text-2xl font-semibold items-center m-auto">Время</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">10:00-12:00</p>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end  ">
-                        <p class="text-2xl font-semibold items-center m-auto">Кабинет</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">102</p>
-                    </div>
-                </li>
-                <li class="flex justify-between gap-x-6 p-5 flex-1">
-                    <div class="flex min-w-0 gap-x-4">
-                        <div class="size-20 flex-none rounded-full "></div>
-                        <div class="min-w-0 flex-auto">
-                            <p class="text-3xl font-semibold ">Новичихин Андрей Евгеньевич</p>
-                            <p class="mt-1 truncate text-2xl font-semibold">Врач-кардиолог</p>
-                        </div>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                        <p class="text-2xl font-semibold items-center m-auto">Время</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">10:00-12:00</p>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end  ">
-                        <p class="text-2xl font-semibold items-center m-auto">Кабинет</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">102</p>
-                    </div>
-                </li>
-                <li class="flex justify-between gap-x-6 p-5 flex-1">
-                    <div class="flex min-w-0 gap-x-4">
-                        <div class="size-20 flex-none rounded-full "></div>
-                        <div class="min-w-0 flex-auto">
-                            <p class="text-3xl font-semibold ">Новичихин Андрей Евгеньевич</p>
-                            <p class="mt-1 truncate text-2xl font-semibold">Врач-кардиолог</p>
-                        </div>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                        <p class="text-2xl font-semibold items-center m-auto">Время</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">10:00-12:00</p>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end  ">
-                        <p class="text-2xl font-semibold items-center m-auto">Кабинет</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">102</p>
-                    </div>
-                </li>
-                <li class="flex justify-between gap-x-6 p-5 flex-1">
-                    <div class="flex min-w-0 gap-x-4">
-                        <div class="size-20 flex-none rounded-full "></div>
-                        <div class="min-w-0 flex-auto">
-                            <p class="text-3xl font-semibold ">Новичихин Андрей Евгеньевич</p>
-                            <p class="mt-1 truncate text-2xl font-semibold">Врач-кардиолог</p>
-                        </div>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                        <p class="text-2xl font-semibold items-center m-auto">Время</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">10:00-12:00</p>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end  ">
-                        <p class="text-2xl font-semibold items-center m-auto">Кабинет</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">102</p>
-                    </div>
-                </li>
-                <li class="flex justify-between gap-x-6 p-5 flex-1">
-                    <div class="flex min-w-0 gap-x-4">
-                        <div class="size-20 flex-none rounded-full "></div>
-                        <div class="min-w-0 flex-auto">
-                            <p class="text-3xl font-semibold ">Новичихин Андрей Евгеньевич</p>
-                            <p class="mt-1 truncate text-2xl font-semibold">Врач-кардиолог</p>
-                        </div>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                        <p class="text-2xl font-semibold items-center m-auto">Время</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">10:00-12:00</p>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end  ">
-                        <p class="text-2xl font-semibold items-center m-auto">Кабинет</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">102</p>
-                    </div>
-                </li>
-                <li class="flex justify-between gap-x-6 p-5 flex-1">
-                    <div class="flex min-w-0 gap-x-4">
-                        <div class="size-20 flex-none rounded-full "></div>
-                        <div class="min-w-0 flex-auto">
-                            <p class="text-3xl font-semibold ">Новичихин Андрей Евгеньевич</p>
-                            <p class="mt-1 truncate text-2xl font-semibold">Врач-кардиолог</p>
-                        </div>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                        <p class="text-2xl font-semibold items-center m-auto">Время</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">10:00-12:00</p>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end  ">
-                        <p class="text-2xl font-semibold items-center m-auto">Кабинет</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">102</p>
-                    </div>
-                </li>
-                <li class="flex justify-between gap-x-6 p-5 flex-1">
-                    <div class="flex min-w-0 gap-x-4">
-                        <div class="size-20 flex-none rounded-full "></div>
-                        <div class="min-w-0 flex-auto">
-                            <p class="text-3xl font-semibold ">Новичихин Андрей Евгеньевич</p>
-                            <p class="mt-1 truncate text-2xl font-semibold">Врач-кардиолог</p>
-                        </div>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                        <p class="text-2xl font-semibold items-center m-auto">Время</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">10:00-12:00</p>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end  ">
-                        <p class="text-2xl font-semibold items-center m-auto">Кабинет</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">102</p>
-                    </div>
-                </li>
-                <li class="flex justify-between gap-x-6 p-5 flex-1">
-                    <div class="flex min-w-0 gap-x-4">
-                        <div class="size-20 flex-none rounded-full "></div>
-                        <div class="min-w-0 flex-auto">
-                            <p class="text-3xl font-semibold ">Новичихин Андрей Евгеньевич</p>
-                            <p class="mt-1 truncate text-2xl font-semibold">Врач-кардиолог</p>
-                        </div>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                        <p class="text-2xl font-semibold items-center m-auto">Время</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">10:00-12:00</p>
-                    </div>
-                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end  ">
-                        <p class="text-2xl font-semibold items-center m-auto">Кабинет</p>
-                        <p class="mt-1 text-3xl font-semibold items-center m-auto">102</p>
-                    </div>
-                </li>
-                
-
-
-
+                    </li>
+                @endforeach
             </ul>
         </div>
 
